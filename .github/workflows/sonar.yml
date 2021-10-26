@@ -1,0 +1,25 @@
+on:
+  push:
+    branches:
+      - master
+name: SonarCloud
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Get master
+      run: git fetch origin master
+    - name: Instalar dependencias
+      run:  npm install
+    - name: Instalar Jest
+      run:  sudo npm install -g jest
+    - name: Executar testes
+      run:  npm run test
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
