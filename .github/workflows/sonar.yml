@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - main
 name: SonarCloud
 jobs:
   sonarcloud:
@@ -10,8 +10,8 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - name: Get master
-      run: git fetch origin master
+    - name: Get main
+      run: git fetch origin main
     - name: Instalar dependencias
       run:  npm install
     - name: Instalar Jest
